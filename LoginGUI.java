@@ -4,7 +4,6 @@ import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -80,9 +79,9 @@ public class LoginGUI extends JComponent implements Runnable {
 	}
 
 	public void run() {
-		//Welcome panel
+		//welcome panel
 		welcomePanel = new JFrame("Welcome");
-		ImageIcon icon = new ImageIcon("Welcome.jpg");
+		ImageIcon icon = new ImageIcon("Welcome.png");
 		JLabel label = new JLabel(icon);
 		welcomePanel.getContentPane().add(label, BorderLayout.CENTER);
 		login = new JButton("Login");
@@ -93,7 +92,7 @@ public class LoginGUI extends JComponent implements Runnable {
 		subPanel.add(login);
 		subPanel.add(createAccount);
 		welcomePanel.add(subPanel, BorderLayout.SOUTH);
-		welcomePanel.setSize(600, 400);
+		welcomePanel.setSize(500, 800);
 		welcomePanel.setLocationRelativeTo(null);
 		welcomePanel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		welcomePanel.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -107,30 +106,30 @@ public class LoginGUI extends JComponent implements Runnable {
 		
 		//login panel
 		loginPanel = new JFrame("Login");
-		JLabel subLabel = new JLabel(new ImageIcon("LoginBackground.png"));
+		JLabel subLabel = new JLabel(new ImageIcon("Welcome.png"));
 		loginPanel.add(subLabel);
 		JLabel userNameLabel = new JLabel("Username:");
-		userNameLabel.setBounds(175, 110, 80, 25);
+		userNameLabel.setBounds(160, 600, 80, 25);
 		subLabel.add(userNameLabel);
-		userName = new JTextField(5);
-		userName.setBounds(250, 110, 80, 25);
+		userName = new JTextField(10);
+		userName.setBounds(235, 600, 80, 25);
 		subLabel.add(userName);
 		JLabel passwordLabel = new JLabel("Password:");
-		passwordLabel.setBounds(179, 140, 80, 25);
+		passwordLabel.setBounds(160, 635, 80, 25);
 		subLabel.add(passwordLabel);
-		password = new JPasswordField(5);
-		password.setBounds(250, 140, 80, 25);
+		password = new JPasswordField(10);
+		password.setBounds(235, 635, 80, 25);
 		subLabel.add(password);
 		enter = new JButton("Login");
-		enter.setBounds(250, 170, 80, 25);
+		enter.setBounds(140, 670, 80, 25);
 		enter.setAlignmentX(CENTER_ALIGNMENT);
 		enter.addActionListener(actionListener);
 		subLabel.add(enter);
 		back = new JButton("Back");
-		back.setBounds(250, 200, 80, 25);
+		back.setBounds(275, 670, 80, 25);
 		back.addActionListener(actionListener);
 		subLabel.add(back);
-		loginPanel.setSize(600, 400);
+		loginPanel.setSize(500, 800);
 		loginPanel.setLocationRelativeTo(null);
 		loginPanel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		loginPanel.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -143,41 +142,41 @@ public class LoginGUI extends JComponent implements Runnable {
 		
 		//create Account panel
 		createAccountPanel = new JFrame("Create Account");
-		JLabel subLabel1 = new JLabel(new ImageIcon("LoginBackground.png"));
+		JLabel subLabel1 = new JLabel(new ImageIcon("Welcome.png"));
 		createAccountPanel.add(subLabel1);
 		JLabel userNameLabel1 = new JLabel("Username:");
-		userNameLabel1.setBounds(175, 110, 80, 25);
+		userNameLabel1.setBounds(150, 600, 80, 25);
 		subLabel1.add(userNameLabel1);
 		userName1 = new JTextField(5);
-		userName1.setBounds(250, 110, 80, 25);
+		userName1.setBounds(255, 600, 80, 25);
 		subLabel1.add(userName1);
 		JLabel passwordLabel1 = new JLabel("Password:");
-		passwordLabel1.setBounds(179, 140, 80, 25);
+		passwordLabel1.setBounds(150, 625, 80, 25);
 		subLabel1.add(passwordLabel1);
 		password1 = new JPasswordField(5);
-		password1.setBounds(250, 140, 80, 25);
+		password1.setBounds(255, 625, 80, 25);
 		subLabel1.add(password1);
 		JLabel phoneNumberLabel = new JLabel("Phone Number:");
-		phoneNumberLabel.setBounds(155, 170, 100, 25);
+		phoneNumberLabel.setBounds(150, 650, 100, 25);
 		subLabel1.add(phoneNumberLabel);
 		phoneNumber = new JTextField(5);
-		phoneNumber.setBounds(250, 170, 80, 25);
+		phoneNumber.setBounds(255, 650, 80, 25);
 		subLabel1.add(phoneNumber);
 		JLabel emailLabel = new JLabel("Email:");
-		emailLabel.setBounds(208, 200, 80, 25);
+		emailLabel.setBounds(150, 675, 80, 25);
 		subLabel1.add(emailLabel);
 		email = new JTextField(5);
-		email.setBounds(250, 200, 80, 25);
+		email.setBounds(255, 675, 80, 25);
 		subLabel1.add(email);
 		back1 = new JButton("Back");
-		back1.setBounds(250, 260, 80, 25);
+		back1.setBounds(275, 720, 80, 25);
 		back1.addActionListener(actionListener);
 		subLabel1.add(back1);
 		enter1 = new JButton("Create Account");
-		enter1.setBounds(230, 230, 130, 25);
+		enter1.setBounds(130, 720, 130, 25);
 		enter1.addActionListener(actionListener);
 		subLabel1.add(enter1);
-		createAccountPanel.setSize(600, 400);
+		createAccountPanel.setSize(500, 800);
 		createAccountPanel.setLocationRelativeTo(null);
 		createAccountPanel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		createAccountPanel.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
