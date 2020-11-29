@@ -1,3 +1,7 @@
+cow,mmmmmmmm,a@b.com,1231231231
+fred,password,a@b.com,1231231230
+Cow,dairy@ssassin678,radicalbovine@werenotsteak.org,1121121212
+Bill,w@nttheomnitrix,conquer@universe.coffee,1111111111
 simon,password,stwiss@purdue.edu,2603100260
 saul,password,emeans@purdue.edu,1234567890
 Exit
