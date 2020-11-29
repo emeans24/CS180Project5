@@ -1,4 +1,16 @@
+package CS180Project5;
+
 import java.util.ArrayList;
+
+/**
+ * Project 5
+ *
+ * Received guidance from Stack Overflow and high school friend
+ *
+ * @author Simon Twiss, Saul Means, Timothy Porterfield
+ * @version 11/28/2020
+ *
+ */
 
 public class User {
 	private String userName;
@@ -7,45 +19,90 @@ public class User {
 	private long phoneNumber;
 	
 	public User(String userName, String password, String email, long phoneNumber) {
-		this.userName = userName;
-		this.password = password;
-		this.email = email;
-		this.phoneNumber = phoneNumber;
+		try {
+			this.userName = userName;
+			this.password = password;
+			this.email = email;
+			this.phoneNumber = phoneNumber;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void setUserName(String userName) {
-		this.userName = userName;
+		try {
+			this.userName = userName;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public String getUserName() {
-		return this.userName;
+		try {
+			return this.userName;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null; // default return statement for when Exceptions are found
+		}
 	}
 	
 	public void setPassword(String password) {
-		this.password = password;
+		try {
+			this.password = password;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public String getPassword() {
-		return this.password;
+		try {
+			return this.password;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null; // default return statement for when Exceptions are found
+		}
 	}
 	
 	public void setEmail(String email) {
-		this.email = email;
+		try {
+			this.email = email;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public String getEmail() {
-		return this.email;
+		try {
+			return this.email;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null; // default return statement for when Exceptions are found
+		}
 	}
 	
-	public void setPhoneNumber(int phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setPhoneNumber(long phoneNumber) {
+		try {
+			this.phoneNumber = phoneNumber;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public long getPhoneNumber() {
-		return this.phoneNumber;
+		try {
+			return this.phoneNumber;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1; // default return statement for when Exceptions are found
+		}
 	}
 	
 	public String toString() {
-		return this.userName + "," + this.password + "," + this.email + "," + this.phoneNumber;
+		try {
+			return this.userName + "," + this.password + "," + this.email + "," + this.phoneNumber;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null; // default return statement for when Exceptions are found
+		}
 	}
 }
