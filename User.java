@@ -3,12 +3,12 @@ package CS180Project5;
 import java.util.ArrayList;
 
 /**
- * Project 5
+ * User
  *
  * Received guidance from Stack Overflow and high school friend
  *
  * @author Simon Twiss, Saul Means, Timothy Porterfield
- * @version 11/28/2020
+ * @version 12/1/2020
  *
  */
 

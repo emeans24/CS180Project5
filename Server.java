@@ -13,12 +13,12 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 /**
- * Project 5
+ * Server
  *
  * Received guidance from Stack Overflow and high school friend
  *
  * @author Simon Twiss, Saul Means, Timothy Porterfield
- * @version 11/28/2020
+ * @version 12/1/2020
  *
  */
 
@@ -32,7 +32,8 @@ public class Server {
 			String line;
 			String finalFile = "";
 			PrintWriter writer = new PrintWriter(socket.getOutputStream());
-			try (BufferedReader bfr = new BufferedReader(new FileReader(new File("C:\\Users\\timmo\\src\\Users.txt")))) {
+			try (BufferedReader bfr = new BufferedReader(new FileReader(new
+					File("C:\\Users\\timmo\\src\\CS180Project5\\Users.txt")))) {
 				line = bfr.readLine();
 				finalFile = line;
 				while (line != null) {
@@ -52,7 +53,7 @@ public class Server {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			try {
 				line = reader.readLine();
-				File file = new File("C:\\Users\\timmo\\src\\Users.txt");
+				File file = new File("C:\\Users\\timmo\\src\\CS180Project5\\Users.txt");
 				FileOutputStream fos = new FileOutputStream(file);
 				PrintWriter pw = new PrintWriter(fos);
 				while (!line.equals("Exit")) {

@@ -1,3 +1,5 @@
+package CS180Project5;
+
 import java.io.*;
 
 /**
@@ -5,9 +7,10 @@ import java.io.*;
  *
  * This defines the messages being used in the server
  *
- * @author Ashutosh Annapantula
- * @version November 30, 2020
+ * @author Ashutosh Annapantula, Timothy Porterfield
+ * @version 12/1/2020
  */
+
 public class ChatMessage implements Serializable {
 
     protected static final long serialVersionUID = 1112122200L;
@@ -24,15 +27,30 @@ public class ChatMessage implements Serializable {
 
     // constructor
     ChatMessage(int type, String message) {
-        this.type = type;
-        this.message = message;
+        try {
+            this.type = type;
+            this.message = message;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // getters
     int getType() {
-        return type;
+        try {
+            return type;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1; // default return statement in case Exception is thrown
+        }
     }
+
     String getMessage() {
-        return message;
+        try {
+            return message;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ""; // default return statement in case Exception is thrown
+        }
     }
 }

@@ -1,15 +1,17 @@
+package CS180Project5;
+
 import java.io.*;
 import java.net.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * Server
+ * MessageServer
  *
  * The server that can be run as console or GUI
  *
- * @author Ashutosh Annapantula
- * @version November 30, 2020
+ * @author Ashutosh Annapantula, Timothy Porterfield
+ * @version 12/1/2020
  */
 public class MessageServer {
     // a unique ID for each connection
@@ -35,21 +37,26 @@ public class MessageServer {
     }
 
     public MessageServer(int port, MessageServerGUI sg) {
-        // GUI or not
-        this.sg = sg;
-        // the port
-        this.port = port;
-        // to display hh:mm:ss
-        sdf = new SimpleDateFormat("HH:mm:ss");
-        // ArrayList for the Client list
-        al = new ArrayList<ClientThread>();
+        try {
+            // GUI or not
+            this.sg = sg;
+            // the port
+            this.port = port;
+            // to display hh:mm:ss
+            sdf = new SimpleDateFormat("HH:mm:ss");
+            // ArrayList for the Client list
+            al = new ArrayList<ClientThread>();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void start() {
-        keepGoing = true;
-        /* create socket server and wait for connection requests */
         try
         {
+            keepGoing = true;
+            /* create socket server and wait for connection requests */
+
             // the socket used by the server
             ServerSocket serverSocket = new ServerSocket(port);
 
@@ -90,16 +97,18 @@ public class MessageServer {
         catch (IOException e) {
             String msg = sdf.format(new Date()) + " Exception on new ServerSocket: " + e + "\n";
             display(msg);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     /*
      * For the GUI to stop the server
      */
     protected void stop() {
-        keepGoing = false;
-        // connect to myself as Client to exit statement
-        // Socket socket = serverSocket.accept();
         try {
+            keepGoing = false;
+            // connect to myself as Client to exit statement
+            // Socket socket = serverSocket.accept();
             new Socket("localhost", port);
         }
         catch(Exception e) {
@@ -110,47 +119,59 @@ public class MessageServer {
      * Display an event (not a message) to the console or the GUI
      */
     private void display(String msg) {
-        String time = sdf.format(new Date()) + " " + msg;
-        if(sg == null)
-            System.out.println(time);
-        else
-            sg.appendEvent(time + "\n");
+        try {
+            String time = sdf.format(new Date()) + " " + msg;
+            if (sg == null)
+                System.out.println(time);
+            else
+                sg.appendEvent(time + "\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     /*
      *  to broadcast a message to all Clients
      */
     private synchronized void broadcast(String message) {
-        // add HH:mm:ss and \n to the message
-        String time = sdf.format(new Date());
-        String messageLf = time + " " + message + "\n";
-        // display message on console or GUI
-        if(sg == null)
-            System.out.print(messageLf);
-        else
-            sg.appendRoom(messageLf);     // append in the room window
+        try {
+            // add HH:mm:ss and \n to the message
+            String time = sdf.format(new Date());
+            String messageLf = time + " " + message + "\n";
+            // display message on console or GUI
+            if (sg == null)
+                System.out.print(messageLf);
+            else
+                sg.appendRoom(messageLf);     // append in the room window
 
-        // we loop in reverse order in case we would have to remove a Client
-        // because it has disconnected
-        for(int i = al.size(); --i >= 0;) {
-            ClientThread ct = al.get(i);
-            // try to write to the Client if it fails remove it from the list
-            if(!ct.writeMsg(messageLf)) {
-                al.remove(i);
-                display("Disconnected Client " + ct.username + " removed from list.");
+            // we loop in reverse order in case we would have to remove a Client
+            // because it has disconnected
+            for (int i = al.size(); --i >= 0; ) {
+                ClientThread ct = al.get(i);
+                // try to write to the Client if it fails remove it from the list
+                if (!ct.writeMsg(messageLf)) {
+                    al.remove(i);
+                    display("Disconnected Client " + ct.username + " removed from list.");
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     // for a client who logoff using the LOGOUT message
     synchronized void remove(int id) {
-        // scan the array list until we found the Id
-        for(int i = 0; i < al.size(); ++i) {
-            ClientThread ct = al.get(i);
-            // found it
-            if(ct.id == id) {
-                al.remove(i);
-                return;
+        try {
+            // scan the array list until we found the Id
+            for (int i = 0; i < al.size(); ++i) {
+                ClientThread ct = al.get(i);
+                // found it
+                if (ct.id == id) {
+                    al.remove(i);
+                    return;
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
