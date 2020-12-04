@@ -12,12 +12,12 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 /**
- * Project 5 
+ * LoginGUI
  * 
  * Received guidance from Stack Overflow and high school friend
  * 
  * @author Simon Twiss, Saul Means, Timothy Porterfield
- * @version 11/28/2020
+ * @version 12/1/2020
  * 
  */
 
