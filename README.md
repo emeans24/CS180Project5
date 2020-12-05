@@ -1,6 +1,6 @@
 # CS180Project5
 
-Note: did not test methods involving concurrency, as Campuswire post #3414 suggested testing
+Note: did not test all methods involving concurrency, as Campuswire post #3414 suggested testing
 for those methods was optional.
 
 Tests for LoginGUI
