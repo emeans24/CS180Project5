@@ -12,12 +12,10 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 /**
- * LoginGUI
- * 
- * Received guidance from Stack Overflow and high school friend
+ * Project 5 
  * 
  * @author Simon Twiss, Saul Means, Timothy Porterfield
- * @version 12/1/2020
+ * @version 11/28/2020
  * 
  */
 
@@ -26,17 +24,25 @@ public class LoginGUI extends JComponent implements Runnable { // it is assumed 
 	JButton createAccount;
 	JButton enter;
 	JButton enter1;
+	JButton enter2;
 	JButton back;
 	JButton back1;
+	JButton back2;
+	JButton deleteAccount;
 	JTextField userName;
 	JTextField userName1;
+	JTextField userName2;
 	JPasswordField password;
 	JPasswordField password1;
+	JPasswordField password2;
 	JTextField phoneNumber;
 	JTextField email;
 	JFrame welcomePanel;
 	JFrame loginPanel;
 	JFrame createAccountPanel;
+	JFrame deleteAccountPanel;
+	static String accountToDelete = "";
+	static  Color gold = new Color(212, 189, 138);
 	static int counter = 0;
 	static ArrayList<User> allUsers = new ArrayList<User>();
 	static ArrayList<User> newUsers = new ArrayList<User>();
@@ -83,6 +89,9 @@ public class LoginGUI extends JComponent implements Runnable { // it is assumed 
 				writer.write("Exit");
 				writer.println();
 				writer.flush();
+				writer.write(accountToDelete);
+				writer.println();
+				writer.flush();
 			   // socket.close();
 			}
 		} catch (Exception e) {
@@ -91,21 +100,23 @@ public class LoginGUI extends JComponent implements Runnable { // it is assumed 
 	}
 
 	public void run() {
-		// welcome panel
 		try {
 			welcomePanel = new JFrame("Welcome");
-			ImageIcon icon = new ImageIcon("CS180Project5/Welcome.jpg");
+			ImageIcon icon = new ImageIcon("Welcome.jpg");
 			JLabel label = new JLabel(icon);
 			welcomePanel.getContentPane().add(label, BorderLayout.CENTER);
 			login = new JButton("Login");
 			login.addActionListener(actionListener);
 			createAccount = new JButton("Create Account");
 			createAccount.addActionListener(actionListener);
+			deleteAccount = new JButton("Delete Account");
+			deleteAccount.addActionListener(actionListener);
 			JPanel subPanel = new JPanel();
 			subPanel.add(login);
 			subPanel.add(createAccount);
+			subPanel.add(deleteAccount);
 			welcomePanel.add(subPanel, BorderLayout.SOUTH);
-			welcomePanel.setSize(600, 400);
+			welcomePanel.setSize(500, 700);
 			welcomePanel.setLocationRelativeTo(null);
 			welcomePanel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			welcomePanel.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -119,30 +130,36 @@ public class LoginGUI extends JComponent implements Runnable { // it is assumed 
 
 			// login panel
 			loginPanel = new JFrame("Login");
-			JLabel subLabel = new JLabel(new ImageIcon("CS180Project5/LoginBackground.png"));
+			JLabel subLabel = new JLabel(new ImageIcon("Welcome.jpg"));
 			loginPanel.add(subLabel);
 			JLabel userNameLabel = new JLabel("Username:");
-			userNameLabel.setBounds(175, 110, 80, 25);
+			userNameLabel.setBounds(158, 278, 80, 25);
+			userNameLabel.setOpaque(true);
+			userNameLabel.setBackground(Color.BLACK);
+			userNameLabel.setForeground(gold);
 			subLabel.add(userNameLabel);
 			userName = new JTextField(5);
-			userName.setBounds(250, 110, 80, 25);
+			userName.setBounds(245, 278, 80, 25);
 			subLabel.add(userName);
 			JLabel passwordLabel = new JLabel("Password:"); // it is assumed users will only type their
-			passwordLabel.setBounds(179, 140, 80, 25); // passwords (rather than, for example,
+			passwordLabel.setBounds(158, 308, 80, 25); // passwords (rather than, for example,
+			passwordLabel.setOpaque(true);
+			passwordLabel.setBackground(Color.BLACK);
+			passwordLabel.setForeground(gold);
 			subLabel.add(passwordLabel); // copying and pasting them)
 			password = new JPasswordField(5);
-			password.setBounds(250, 140, 80, 25);
+			password.setBounds(245, 308, 80, 25);
 			subLabel.add(password);
 			enter = new JButton("Login");
-			enter.setBounds(250, 170, 80, 25);
+			enter.setBounds(205, 338, 80, 25);
 			enter.setAlignmentX(CENTER_ALIGNMENT);
 			enter.addActionListener(actionListener);
 			subLabel.add(enter);
 			back = new JButton("Back");
-			back.setBounds(250, 200, 80, 25);
+			back.setBounds(205, 368, 80, 25);
 			back.addActionListener(actionListener);
 			subLabel.add(back);
-			loginPanel.setSize(600, 400);
+			loginPanel.setSize(500, 700);
 			loginPanel.setLocationRelativeTo(null);
 			loginPanel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			loginPanel.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -155,43 +172,54 @@ public class LoginGUI extends JComponent implements Runnable { // it is assumed 
 
 			// create Account panel
 			createAccountPanel = new JFrame("Create Account");
-			JLabel subLabel1 = new JLabel(new ImageIcon("CS180Project5/LoginBackground.png"));
+			JLabel subLabel1 = new JLabel(new ImageIcon("Welcome.jpg"));
 			createAccountPanel.add(subLabel1);
 			JLabel userNameLabel1 = new JLabel("Username:");
-			userNameLabel1.setBounds(175, 110, 80, 25);
+			userNameLabel1.setBounds(140, 248, 98, 25);
+			userNameLabel1.setOpaque(true);
+			userNameLabel1.setBackground(Color.BLACK);
+			userNameLabel1.setForeground(gold);
 			subLabel1.add(userNameLabel1);
 			userName1 = new JTextField(5);
-			userName1.setBounds(250, 110, 80, 25);
+			userName1.setBounds(245, 248, 80, 25);
 			subLabel1.add(userName1);
 			JLabel passwordLabel1 = new JLabel("Password:");
-			passwordLabel1.setBounds(179, 140, 80, 25);
+			passwordLabel1.setBounds(140, 278, 98, 25);
+			passwordLabel1.setOpaque(true);
+			passwordLabel1.setBackground(Color.BLACK);
+			passwordLabel1.setForeground(gold);
 			subLabel1.add(passwordLabel1);
 			password1 = new JPasswordField(5);
-			password1.setBounds(250, 140, 80, 25);
+			password1.setBounds(245, 278, 80, 25);
 			subLabel1.add(password1);
 			JLabel phoneNumberLabel = new JLabel("Phone Number:");
-			phoneNumberLabel.setBounds(155, 170, 100, 25);
+			phoneNumberLabel.setBounds(140, 308, 98, 25);
+			phoneNumberLabel.setOpaque(true);
+			phoneNumberLabel.setBackground(Color.BLACK);
+			phoneNumberLabel.setForeground(gold);
 			subLabel1.add(phoneNumberLabel);
 			phoneNumber = new JTextField(5);
-			phoneNumber.setBounds(250, 170, 80, 25);
+			phoneNumber.setBounds(245, 308, 80, 25);
 			subLabel1.add(phoneNumber);
 			JLabel emailLabel = new JLabel("Email:");
-			emailLabel.setBounds(208, 200, 80, 25);
+			emailLabel.setBounds(140, 338, 98, 25);
+			emailLabel.setOpaque(true);
+			emailLabel.setBackground(Color.BLACK);
+			emailLabel.setForeground(gold);
 			subLabel1.add(emailLabel);
 			email = new JTextField(5);
-			email.setBounds(250, 200, 80, 25);
+			email.setBounds(245, 338, 80, 25);
 			subLabel1.add(email);
 			back1 = new JButton("Back");
-			back1.setBounds(250, 260, 80, 25);
+			back1.setBounds(205, 398, 80, 25);
 			back1.addActionListener(actionListener);
 			subLabel1.add(back1);
 			enter1 = new JButton("Create Account");
-			enter1.setBounds(230, 230, 130, 25);
+			enter1.setBounds(185, 368, 130, 25);
 			enter1.addActionListener(actionListener);
 			subLabel1.add(enter1);
-			createAccountPanel.setSize(600, 400);
+			createAccountPanel.setSize(500, 700);
 			createAccountPanel.setLocationRelativeTo(null);
-			createAccountPanel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			createAccountPanel.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 			createAccountPanel.addWindowListener(new WindowAdapter() {
 				@Override
@@ -199,6 +227,57 @@ public class LoginGUI extends JComponent implements Runnable { // it is assumed 
 					createAccountPanelExitProcedure();
 				}
 			});
+			
+			deleteAccountPanel = new JFrame("Delete Account");
+			JLabel subLabel2 = new JLabel(new ImageIcon("Welcome.jpg"));
+			deleteAccountPanel.add(subLabel2);
+			JLabel userNameLabel2 = new JLabel("Username:");
+			userNameLabel2.setBounds(158, 278, 80, 25);
+			userNameLabel2.setOpaque(true);
+			userNameLabel2.setBackground(Color.BLACK);
+			userNameLabel2.setForeground(gold);
+			subLabel2.add(userNameLabel2);
+			userName2 = new JTextField(5);
+			userName2.setBounds(245, 278, 80, 25);
+			subLabel2.add(userName2);
+			JLabel passwordLabel2 = new JLabel("Password:"); // it is assumed users will only type their
+			passwordLabel2.setBounds(158, 308, 80, 25); // passwords (rather than, for example,
+			passwordLabel2.setOpaque(true);
+			passwordLabel2.setBackground(Color.BLACK);
+			passwordLabel2.setForeground(gold);
+			subLabel2.add(passwordLabel2); // copying and pasting them)
+			password2 = new JPasswordField(5);
+			password2.setBounds(245, 308, 80, 25);
+			subLabel2.add(password2);
+			enter2 = new JButton("Login");
+			enter2.setBounds(205, 338, 80, 25);
+			enter2.setAlignmentX(CENTER_ALIGNMENT);
+			enter2.addActionListener(actionListener);
+			subLabel2.add(enter2);
+			back2 = new JButton("Back");
+			back2.setBounds(205, 368, 80, 25);
+			back2.addActionListener(actionListener);
+			subLabel2.add(back2);
+			deleteAccountPanel.setSize(500, 700);
+			deleteAccountPanel.setLocationRelativeTo(null);
+			deleteAccountPanel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			deleteAccountPanel.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+			deleteAccountPanel.addWindowListener(new WindowAdapter() {
+				@Override
+				public void windowClosing(WindowEvent event) {
+					deleteAccountPanelExitProcedure();
+				}
+			});
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteAccountPanelExitProcedure() {
+		try {
+			deleteAccountPanel.dispose();
+			openAndClose();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -243,12 +322,15 @@ public class LoginGUI extends JComponent implements Runnable { // it is assumed 
 					welcomePanel.dispose();
 					createAccountPanel.setVisible(true);
 				}
-				if (e.getSource() == back || e.getSource() == back1) {
+				if (e.getSource() == back || e.getSource() == back1 || e.getSource() == back2) {
+					deleteAccountPanel.dispose();
 					loginPanel.dispose();
 					password.setText("");
 					password1.setText("");
+					password2.setText("");
 					userName.setText("");
 					userName1.setText("");
+					userName2.setText("");
 					phoneNumber.setText("");
 					email.setText("");
 					createAccountPanel.dispose();
@@ -257,6 +339,7 @@ public class LoginGUI extends JComponent implements Runnable { // it is assumed 
 				// login button on the login panel
 				if (e.getSource() == enter) {
 					if (isAUser(userName.getText(), password.getText()) == true) {
+						String user = userName.getText();
 						loginPanel.dispose();
 						try {
 							openAndClose();
@@ -266,6 +349,11 @@ public class LoginGUI extends JComponent implements Runnable { // it is assumed 
 							e1.printStackTrace();
 						}
 						JOptionPane.showMessageDialog(null, "Login Succesful!", "Success", JOptionPane.PLAIN_MESSAGE);
+						try {
+				            new MessageClientGUI("localhost", 1500, user);
+				        } catch (Exception e1) {
+				            e1.printStackTrace();
+				        }
 						// open the user panel
 					} else {
 						JOptionPane.showMessageDialog(null, "The username or password you entered is incorrect.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -290,6 +378,30 @@ public class LoginGUI extends JComponent implements Runnable { // it is assumed 
 							e1.printStackTrace();
 						}
 						JOptionPane.showMessageDialog(null, "You're account has been succesfully created!", "Success", JOptionPane.PLAIN_MESSAGE);
+						try {
+				            new MessageClientGUI("localhost", 1500, userName);
+				        } catch (Exception e1) {
+				            e1.printStackTrace();
+				        }
+					}
+				}
+				if (e.getSource() == deleteAccount) {
+					welcomePanel.dispose();
+					deleteAccountPanel.setVisible(true);
+				}
+				if (e.getSource() == enter2) {
+					if (deleteUser(userName2.getText(), password2.getText()) == true) {
+						deleteAccountPanel.dispose();
+						try {
+							openAndClose();
+						} catch (UnknownHostException e1) {
+							e1.printStackTrace();
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+						JOptionPane.showMessageDialog(null, "Account Deletion Succesful!", "Success", JOptionPane.PLAIN_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(null, "The username or password you entered is incorrect.", "Error", JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			} catch (Exception e2) {
@@ -303,6 +415,23 @@ public class LoginGUI extends JComponent implements Runnable { // it is assumed 
 			for (int i = 0; i < allUsers.size(); i++) {
 				if (userName.equals(allUsers.get(i).getUserName())) {
 					if (password.equals(allUsers.get(i).getPassword())) {
+						return true;
+					}
+				}
+			}
+			return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public static boolean deleteUser(String userName, String password) {
+		try {
+			for (int i = 0; i < allUsers.size(); i++) {
+				if (userName.equals(allUsers.get(i).getUserName())) {
+					if (password.equals(allUsers.get(i).getPassword())) {
+						accountToDelete = allUsers.get(i).toString();
 						return true;
 					}
 				}
