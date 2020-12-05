@@ -16,6 +16,7 @@ import java.awt.event.*;
 
 public class MessageClientGUI extends JFrame implements ActionListener {
 
+	static String userName;
     private static final long serialVersionUID = 1L;
     // will first hold "Username:", later on "Enter message"
     private JLabel label;
@@ -36,10 +37,9 @@ public class MessageClientGUI extends JFrame implements ActionListener {
     private String defaultHost;
 
     // Constructor connection receiving a socket number
-    MessageClientGUI(String host, int port) {
-
+    MessageClientGUI(String host, int port, String username) {
         super("Chat Client");
-
+        userName = username;
         try {
             defaultPort = port;
             defaultHost = host;
@@ -62,9 +62,9 @@ public class MessageClientGUI extends JFrame implements ActionListener {
             northPanel.add(serverAndPort);
 
             // the Label and the TextField
-            label = new JLabel("Enter your username below", SwingConstants.CENTER);
+            label = new JLabel("Welcome " + username, SwingConstants.CENTER);
             northPanel.add(label);
-            tf = new JTextField("Anonymous");
+            tf = new JTextField("Login, then enter message here.");
             tf.setBackground(Color.WHITE);
             northPanel.add(tf);
             add(northPanel, BorderLayout.NORTH);
@@ -91,9 +91,9 @@ public class MessageClientGUI extends JFrame implements ActionListener {
             southPanel.add(logout);
             southPanel.add(users);
             add(southPanel, BorderLayout.SOUTH);
-
+            setLocationRelativeTo(null);
             setDefaultCloseOperation(EXIT_ON_CLOSE);
-            setSize(600, 600);
+            setSize(500, 800);
             setVisible(true);
             tf.requestFocus();
         } catch (Exception e) {
@@ -119,7 +119,7 @@ public class MessageClientGUI extends JFrame implements ActionListener {
             logout.setEnabled(false);
             users.setEnabled(false);
             label.setText("Enter your username below");
-            tf.setText("Anonymous");
+            //tf.setText("Anonymous");
             // reset port number and host name as a construction time
             tfPort.setText("" + defaultPort);
             tfServer.setText(defaultHost);
@@ -162,7 +162,7 @@ public class MessageClientGUI extends JFrame implements ActionListener {
 
             if (o == login) {
                 // ok it is a connection request
-                String username = tf.getText().trim();
+                String username = userName.trim();
                 // empty username ignore it
                 if (username.length() == 0)
                     return;
@@ -187,7 +187,7 @@ public class MessageClientGUI extends JFrame implements ActionListener {
                 if (!client.start())
                     return;
                 tf.setText("");
-                label.setText("Enter your message below");
+                label.setText(username + ", enter your message below");
                 connected = true;
 
                 // disable login button
@@ -207,12 +207,12 @@ public class MessageClientGUI extends JFrame implements ActionListener {
     }
 
     // to start the whole thing the server
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         try {
             new MessageClientGUI("localhost", 1500);
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
 }
