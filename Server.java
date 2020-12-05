@@ -11,66 +11,87 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
-
-/**
- * Server
- *
- * Received guidance from Stack Overflow and high school friend
- *
- * @author Simon Twiss, Saul Means, Timothy Porterfield
- * @version 12/1/2020
- *
+/*
+ * Project 5 
+ * 
+ * 
+ * @author Simon Twiss, Saul Means
+ * @version 11/24/2020
+ * 
  */
 
 public class Server {
-	public static void main(String[] args) throws UnknownHostException, IOException, ClassNotFoundException {
-
-		ServerSocket serverSocket = new ServerSocket(4242);
-		Socket socket = serverSocket.accept();
-
+public static void main(String[] args) throws IOException {
+	ServerSocket serverSocket = new ServerSocket(4242);
+	Server s = new Server();
+	while (true) {
+		Socket socket = null;
 		try {
-			String line;
-			String finalFile = "";
-			PrintWriter writer = new PrintWriter(socket.getOutputStream());
-			try (BufferedReader bfr = new BufferedReader(new FileReader(new
-					File("C:\\Users\\timmo\\src\\CS180Project5\\Users.txt")))) {
-				line = bfr.readLine();
-				finalFile = line;
-				while (line != null) {
-					writer.write(line);
-					writer.println();
-					writer.flush();
-					line = bfr.readLine();
-					if (line != null && !line.equals("Exit")) {
-						finalFile = finalFile + "\n" + line;
-					}
-				}
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			socket = serverSocket.accept();
+			PrintWriter writer = new PrintWriter(socket.getOutputStream()); 
 			BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			try {
-				line = reader.readLine();
-				File file = new File("C:\\Users\\timmo\\src\\CS180Project5\\Users.txt");
-				FileOutputStream fos = new FileOutputStream(file);
-				PrintWriter pw = new PrintWriter(fos);
-				while (!line.equals("Exit")) {
-					finalFile = line + "\n" + finalFile;
-					line = reader.readLine();
-				}
-				pw.println(finalFile);
-				pw.println("Exit");
-				pw.flush();
-				pw.close();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
+			Thread t = s.new ClientHandler(socket, reader, writer);
+			t.start();
 		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
 			socket.close();
+			e.printStackTrace();
 		}
 	}
+}
+
+class ClientHandler extends Thread {
+	final PrintWriter writer;
+	final BufferedReader reader;
+	final Socket socket;
+	
+	public ClientHandler(Socket socket, BufferedReader reader, PrintWriter writer) {
+		this.socket = socket;
+		this.reader = reader;
+		this.writer = writer;
+	}
+	
+	@Override
+	public void run() {
+		String line;
+		String finalFile = "";
+		try (BufferedReader bfr = new BufferedReader(new FileReader(new File("Users.txt")))) {
+			line = bfr.readLine();
+			finalFile = line;
+			while (line != null) {
+				writer.write(line);
+				writer.println();
+				writer.flush();
+				line = bfr.readLine();
+				if (line != null && !line.equals("Exit")) {
+					finalFile = finalFile + "\n" + line;
+				}
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			line = reader.readLine();
+			File file = new File("Users.txt");
+			FileOutputStream fos = new FileOutputStream(file);
+	        PrintWriter pw = new PrintWriter(fos);
+			while (!line.equals("Exit")) {
+				finalFile = line + "\n" + finalFile;
+				line = reader.readLine();
+			}
+			line = reader.readLine();
+			if (!line.equals("")) {
+				finalFile = finalFile.replace(line + "\n", "");
+			}
+			pw.println(finalFile);
+			pw.println("Exit");
+			pw.flush();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}
 }
