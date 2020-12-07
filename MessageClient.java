@@ -1,6 +1,6 @@
-package CS180Project5;
-
 import java.net.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.io.*;
 import java.util.*;
 
@@ -24,7 +24,8 @@ public class MessageClient  {
     private MessageClientGUI cg;
 
     // the server, the port and the username
-    private String server, username;
+    private String server;
+    private String username;
     private int port;
 
     /*
