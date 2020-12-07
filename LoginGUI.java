@@ -129,7 +129,7 @@ public class LoginGUI extends JComponent implements Runnable { // it is assumed 
     public void run() {
         try {
             welcomePanel = new JFrame("Welcome");
-            ImageIcon icon = new ImageIcon("C:\\Users\\ashut\\Welcome2.png");
+            ImageIcon icon = new ImageIcon("Welcome.jpg");
             JLabel label = new JLabel(icon);
             welcomePanel.getContentPane().add(label, BorderLayout.CENTER);
 
@@ -166,7 +166,7 @@ public class LoginGUI extends JComponent implements Runnable { // it is assumed 
 
             // login panel
             loginPanel = new JFrame("Login");
-            JLabel subLabel = new JLabel(new ImageIcon("C:\\Users\\ashut\\Welcome.png"));
+            JLabel subLabel = new JLabel(new ImageIcon("Welcome.jpg"));
             loginPanel.add(subLabel);
             JLabel userNameLabel = new JLabel("Username:");
             userNameLabel.setBounds(158, 278, 80, 25);
@@ -308,36 +308,36 @@ public class LoginGUI extends JComponent implements Runnable { // it is assumed 
 
             //Second login screen
             loginPanel1 = new JFrame("Login");
-            JLabel subLabel3 = new JLabel(new ImageIcon("Welcome.png"));
+            JLabel subLabel3 = new JLabel(new ImageIcon("Welcome.jpg"));
             loginPanel1.add(subLabel3);
             JLabel userNameLabel3 = new JLabel("Username:");
-            userNameLabel3.setBounds(154, 600, 80, 25);
+            userNameLabel3.setBounds(158, 278, 80, 25);
             userNameLabel3.setOpaque(true);
             userNameLabel3.setBackground(Color.BLACK);
             userNameLabel3.setForeground(gold);
             subLabel3.add(userNameLabel3);
             userName3 = new JTextField(5);
-            userName3.setBounds(255, 600, 80, 25);
+            userName3.setBounds(245, 278, 80, 25);
             subLabel3.add(userName3);
             JLabel passwordLabel3 = new JLabel("Password:"); // it is assumed users will only type their
-            passwordLabel3.setBounds(154, 630, 80, 25); // passwords (rather than, for example,
+            passwordLabel3.setBounds(158, 308, 80, 25); // passwords (rather than, for example,
             passwordLabel3.setOpaque(true);
             passwordLabel3.setBackground(Color.BLACK);
             passwordLabel3.setForeground(gold);
             subLabel3.add(passwordLabel3); // copying and pasting them)
             password3 = new JPasswordField(5);
-            password3.setBounds(255, 630, 80, 25);
+            password3.setBounds(245, 308, 80, 25);
             subLabel3.add(password3);
             enter3 = new JButton("Login");
-            enter3.setBounds(140, 675, 80, 25);
+            enter3.setBounds(205, 338, 80, 25);
             enter3.setAlignmentX(CENTER_ALIGNMENT);
             enter3.addActionListener(actionListener);
             subLabel3.add(enter3);
             back3 = new JButton("Back");
-            back3.setBounds(260, 675, 80, 25);
+            back3.setBounds(205, 368, 80, 25);
             back3.addActionListener(actionListener);
             subLabel3.add(back3);
-            loginPanel1.setSize(500, 800);
+            loginPanel1.setSize(500, 700);
             loginPanel1.setLocationRelativeTo(null);
             loginPanel1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             loginPanel1.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -350,53 +350,53 @@ public class LoginGUI extends JComponent implements Runnable { // it is assumed 
 
             //Edit Account Screen
             editAccountPanel = new JFrame("Edit Account Info");
-            JLabel subLabel4 = new JLabel(new ImageIcon("Welcome.png"));
+            JLabel subLabel4 = new JLabel(new ImageIcon("Welcome.jpg"));
             editAccountPanel.add(subLabel4);
             JLabel userNameLabel4 = new JLabel("New Username:");
-            userNameLabel4.setBounds(134, 600, 120, 25);
+            userNameLabel4.setBounds(140, 248, 98, 25);
             userNameLabel4.setOpaque(true);
             userNameLabel4.setBackground(Color.BLACK);
             userNameLabel4.setForeground(gold);
             subLabel4.add(userNameLabel4);
             userName4 = new JTextField(5);
-            userName4.setBounds(260, 600, 80, 25);
+            userName4.setBounds(245, 248, 80, 25);
             subLabel4.add(userName4);
             JLabel passwordLabel4 = new JLabel("New Password:");
-            passwordLabel4.setBounds(134, 630, 120, 25);
+            passwordLabel4.setBounds(140, 278, 98, 25);
             passwordLabel4.setOpaque(true);
             passwordLabel4.setBackground(Color.BLACK);
             passwordLabel4.setForeground(gold);
             subLabel4.add(passwordLabel4);
             password4 = new JPasswordField(5);
-            password4.setBounds(260, 630, 80, 25);
+            password4.setBounds(245, 278, 80, 25);
             subLabel4.add(password4);
             JLabel phoneNumberLabel4 = new JLabel("New Phone Number:");
-            phoneNumberLabel4.setBounds(134, 660, 120, 25);
+            phoneNumberLabel4.setBounds(140, 308, 120, 25);
             phoneNumberLabel4.setOpaque(true);
             phoneNumberLabel4.setBackground(Color.BLACK);
             phoneNumberLabel4.setForeground(gold);
             subLabel4.add(phoneNumberLabel4);
             phoneNumber1 = new JTextField(5);
-            phoneNumber1.setBounds(260, 660, 80, 25);
+            phoneNumber1.setBounds(245, 308, 80, 25);
             subLabel4.add(phoneNumber1);
             JLabel emailLabel4 = new JLabel("New Email:");
-            emailLabel4.setBounds(134, 690, 120, 25);
+            emailLabel4.setBounds(140, 338, 120, 25);
             emailLabel4.setOpaque(true);
             emailLabel4.setBackground(Color.BLACK);
             emailLabel4.setForeground(gold);
             subLabel4.add(emailLabel4);
             email1 = new JTextField(5);
-            email1.setBounds(260, 690, 80, 25);
+            email1.setBounds(245, 338, 80, 25);
             subLabel4.add(email1);
             back4 = new JButton("Back");
-            back4.setBounds(260, 735, 80, 25);
+            back4.setBounds(205, 398, 80, 25);
             back4.addActionListener(actionListener);
             subLabel4.add(back4);
             enter4 = new JButton("Create Account");
-            enter4.setBounds(140, 735, 130, 25);
+            enter4.setBounds(185, 368, 130, 25);
             enter4.addActionListener(actionListener);
             subLabel4.add(enter4);
-            editAccountPanel.setSize(500, 800);
+            editAccountPanel.setSize(500, 700);
             editAccountPanel.setLocationRelativeTo(null);
             editAccountPanel.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             editAccountPanel.addWindowListener(new WindowAdapter() {
