@@ -5,6 +5,8 @@ for those methods was optional.
 
 Tests for LoginGUI
 
+    The LoginGUI is used when a client runs the program initially, giving them the option to login, create an account, delete an account, or edit an account. This is what leads     to the message screens and allows for users to message one another. This is connected to the server class.
+    
     GUI Test 1 for openAndClose() method
         Step 1: Activate Server class, such as through terminal.
         Step 2: Activate LoginGUI class, such as through terminal.
@@ -186,6 +188,8 @@ Tests for LoginGUI
     
 Tests for Server
 
+    The server is what hold information for users that have been created. NOTE that this class AND the message server GUI must be run first in order for the program to work as expected. This server as well as the other one must also be set up to an I.P. address that the clients connect to in order to run from multiple devices. This can be done by replacing the word "localhost" with the I.P. address in the loginGUI class.
+    
     We used JUnit to test whether the class existed and was inheriting from
     the correct superclass; whether it had the correct fields, and whether
     they had the correct types and access modifiers; whether it had the
@@ -195,6 +199,8 @@ Tests for Server
         
 Tests for User
 
+    The user class is used to create user objects uesd by other classes to set and edit user information.
+    
     We used JUnit to test whether the class existed and was inheriting from
     the correct superclass; whether it had the correct fields, and whether
     they had the correct types and access modifiers; whether it had the
@@ -204,6 +210,8 @@ Tests for User
         
 Tests for ChatMessage
 
+    Chat message is called upon by message client in order to succesfully send messages in the program.
+    
     We used JUnit to test whether the class existed and was inheriting from
     the correct superclass; whether it had the correct fields, and whether
     they had the correct types and access modifiers; whether it had the
@@ -213,6 +221,8 @@ Tests for ChatMessage
     
 Tests for MessageClient
 
+    MessageClient is called upon by messageClientGUI in order to succesfully send messages in the program.
+    
     GUI Test 1 for display() method in GUI mode
         Although the display() method deals solely
         with GUI operations in GUI mode, we chose
@@ -291,6 +301,8 @@ Tests for MessageClient
 
 Tests for MessageClientGUI
 
+    MessageClientGUI is what appears when someone wants to send a message to another user. This GUI calls message client, chat message, and messageServer(GUI) in order to succesfully run.
+    
     GUI Test 1 for append() method
         Although the append() method deals solely
         with GUI operations, we chose to test it
@@ -332,6 +344,8 @@ Tests for MessageClientGUI
         
 Tests for MessageClientGUI
 
+    MessageClientGUI is what appears when someone wants to send a message to another user. This GUI calls message client, chat message, and messageServer(GUI) in order to succesfully run.
+    
     GUI Test 1 for actionPerformed()
         Step 1: Run MessageServer.
         Step 2: Run MessageClient, then MessageClientGUI.
@@ -361,6 +375,9 @@ Tests for MessageClientGUI
     
 Tests for MessageServer
 
+    
+    Message Server is called upon by messageServerGUI in order to succesfully serve as a server to the clients trying to create messages.
+    
     GUI Test 1 for start() method
         To test this method, simply run the MessageServer class. If the
         window running the method shows the message "Server waiting for
@@ -414,6 +431,8 @@ Tests for MessageServer
     wrong with the method.
     
 Tests for MessageServerGUI
+    
+    MessageServerGUI is a threaded server that can handle multiple clients and deaels with message requests. NOTE that this class AND the server class must be run first in order for the program to function. After both of these classes are run they will never stop running and the loginGUI class can be ran infinitely, connecting to each server each time. Furthermore, in order to access the servers remotely they must both me run on the same I.P. address, and each instance of "localhost" in the loginGUI class must be replaced with the IP address.
     
     GUI Test 1 for start() method
         To test this method, run the MessageServerGUI class. The method is working
