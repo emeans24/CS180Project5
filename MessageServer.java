@@ -26,6 +26,8 @@ public class MessageServer {
     // the boolean that will be turned of to stop the server
     private boolean keepGoing;
 
+    public static ArrayList<String> activeUsers = new ArrayList<String>(99);
+
 
     /*
      *  server constructor that receive the port to listen to for connection as parameter
@@ -108,7 +110,7 @@ public class MessageServer {
             keepGoing = false;
             // connect to myself as Client to exit statement
             // Socket socket = serverSocket.accept();
-            new Socket("25.90.148.185", port);
+            new Socket("localhost", port);
         }
         catch(Exception e) {
             // nothing I can really do
@@ -118,6 +120,8 @@ public class MessageServer {
      * Display an event (not a message) to the console or the GUI
      */
     private void display(String msg) {
+
+
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
         Date dateobj = new Date();
         String formatDate = df.format(dateobj);
@@ -257,6 +261,10 @@ public class MessageServer {
             // to loop until LOGOUT
             boolean keepGoing = true;
             while(keepGoing) {
+                for(int i = 0; i < al.size(); ++i) {
+                    ClientThread ct = al.get(i);
+                    activeUsers.add(ct.username);
+                }
                 // read a String (which is an object)
                 try {
                     cm = (ChatMessage) sInput.readObject();
@@ -287,6 +295,7 @@ public class MessageServer {
                         for(int i = 0; i < al.size(); ++i) {
                             ClientThread ct = al.get(i);
                             writeMsg((i+1) + ") " + ct.username + " since " + ct.date);
+                            activeUsers.add(ct.username);
                         }
                         break;
                 }
