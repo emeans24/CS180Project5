@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -30,7 +31,7 @@ public class MessageClientGUI extends JFrame implements ActionListener {
     // to Logout and get the list of the users
     private JButton login, logout, users;
     // for the chat room
-    private JTextArea ta;
+    private JTextArea ta, sta;
     // if it is for connection
     public boolean connected;
     // the Client object
@@ -40,6 +41,10 @@ public class MessageClientGUI extends JFrame implements ActionListener {
     private String defaultHost;
     // custom gold color
     static Color gold = new Color(212, 189, 138);
+
+
+    // if I am in a GUI
+    private MessageServerGUI sg;
 
     // load the previous chat for the first time
     private boolean prevChatLoaded = false;
@@ -81,12 +86,36 @@ public class MessageClientGUI extends JFrame implements ActionListener {
 
             // The CenterPanel which is the chat room
             ta = new JTextArea("Welcome to the Chat room\n", 80, 80);
-            JPanel centerPanel = new JPanel(new GridLayout(1, 1));
+            JPanel mainCenterPanel = new JPanel(new GridLayout(1, 2));
+            add(mainCenterPanel);
+
+            /*
+             * Get the list of online users.
+             *
+             */
+            System.out.println(MessageServer.activeUsers);
+
+//            for(int i = 0; i < al.size(); ++i) {
+//                ClientThread ct = al.get(i);
+//                writeMsg((i+1) + ") " + ct.username + " since " + ct.date);
+//            }
+
+            sta = new JTextArea("Online Users\n", 20, 20);
+            JPanel sidePanel = new JPanel(new GridLayout(1,1));
+            sidePanel.add(new JScrollPane(sta));
+            sta.setEditable(false);
+            sta.setBackground(Color.LIGHT_GRAY);
+            sta.setForeground(Color.BLUE);
+
+            JPanel centerPanel = new JPanel(new GridLayout(1,1));
+
             centerPanel.add(new JScrollPane(ta));
             ta.setEditable(false);
             ta.setBackground(Color.DARK_GRAY);
             ta.setForeground(gold);
-            add(centerPanel, BorderLayout.CENTER);
+            mainCenterPanel.add(centerPanel, BorderLayout.CENTER);
+            mainCenterPanel.add(sidePanel,BorderLayout.CENTER);
+
 
             // the 3 buttons
             login = new JButton("Login");
