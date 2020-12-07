@@ -1,9 +1,12 @@
-package CS180Project5;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * MessageClientGUI
@@ -38,6 +41,10 @@ public class MessageClientGUI extends JFrame implements ActionListener {
     // custom gold color
     static Color gold = new Color(212, 189, 138);
 
+    // load the previous chat for the first time
+    private boolean prevChatLoaded = false;
+    final String connectionMessage = "Connection accepted";
+    final String closingMessage = "Server has close the connection: java.io.EOFException";
 
     // Constructor connection receiving a socket number
     MessageClientGUI(String host, int port, String username) {
@@ -65,7 +72,7 @@ public class MessageClientGUI extends JFrame implements ActionListener {
             northPanel.add(serverAndPort);
 
             // the Label and the TextField
-            label = new JLabel("Welcome, " + username + "!", SwingConstants.CENTER);
+            label = new JLabel("Welcome " + username, SwingConstants.CENTER);
             northPanel.add(label);
             tf = new JTextField("Login, then enter message here.");
             tf.setBackground(gold);
@@ -77,32 +84,30 @@ public class MessageClientGUI extends JFrame implements ActionListener {
             JPanel centerPanel = new JPanel(new GridLayout(1, 1));
             centerPanel.add(new JScrollPane(ta));
             ta.setEditable(false);
-//            JLabel background = new JLabel(new ImageIcon("chatscreen.png"));
-//            centerPanel.add(background);
             ta.setBackground(Color.DARK_GRAY);
             ta.setForeground(gold);
-
             add(centerPanel, BorderLayout.CENTER);
-
 
             // the 3 buttons
             login = new JButton("Login");
             login.addActionListener(this);
+
             logout = new JButton("Logout");
             logout.addActionListener(this);
-            logout.setEnabled(false);        // you have to login before being able to logout
+            logout.setEnabled(false); // you have to login before being able to logout
+
             users = new JButton("Users");
             users.addActionListener(this);
-            users.setEnabled(false);        // you have to login before being able to Who is in
+            users.setEnabled(false); // you have to login before being able to users
 
             JPanel southPanel = new JPanel();
             southPanel.add(login);
             southPanel.add(logout);
             southPanel.add(users);
             add(southPanel, BorderLayout.SOUTH);
-            setSize(500, 800);
             setLocationRelativeTo(null);
             setDefaultCloseOperation(EXIT_ON_CLOSE);
+            setSize(500, 800);
             setVisible(true);
             tf.requestFocus();
         } catch (Exception e) {
@@ -113,13 +118,34 @@ public class MessageClientGUI extends JFrame implements ActionListener {
 
     // called by the Client to append text in the TextArea
     void append(String str) {
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy ");
+        Date dateobj = new Date();
+        String formatDate = df.format(dateobj);
+
+
+        String userChatFilePath = "C:\\Users\\ashut\\" + userName + "_CHAT.txt";
         try {
-            ta.append(str);
-            ta.setCaretPosition(ta.getText().length() - 1);
+            if (str.contains(connectionMessage) && !prevChatLoaded) {
+                // Lets append the previous chat
+                prevChatLoaded = true;
+
+                String content = new String(Files.readAllBytes(Paths.get(userChatFilePath)));
+                ta.append(str + "\n" + content);
+                ta.setCaretPosition(ta.getText().length() - 1);
+            } else {
+                if (!str.contains(closingMessage)) {
+                    String appndDateStr = formatDate + str;
+                    Files.write(Paths.get(userChatFilePath), appndDateStr.getBytes(), StandardOpenOption.APPEND);
+                }
+                String appndDateStr = formatDate + str;
+                ta.append(appndDateStr);
+                ta.setCaretPosition(ta.getText().length() - 1);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     // called by the GUI is the connection failed
     // we reset our buttons, label, textfield
     void connectionFailed() {
@@ -128,7 +154,7 @@ public class MessageClientGUI extends JFrame implements ActionListener {
             logout.setEnabled(false);
             users.setEnabled(false);
             label.setText("Enter your username below");
-            //tf.setText("Anonymous");
+            // tf.setText("Anonymous");
             // reset port number and host name as a construction time
             tfPort.setText("" + defaultPort);
             tfServer.setText(defaultHost);
@@ -154,7 +180,7 @@ public class MessageClientGUI extends JFrame implements ActionListener {
                 client.sendMessage(new ChatMessage(ChatMessage.LOGOUT, ""));
                 return;
             }
-            // if it the who is in button
+            // if it the users button
             if (o == users) {
                 client.sendMessage(new ChatMessage(ChatMessage.USERS, ""));
                 return;
@@ -167,7 +193,6 @@ public class MessageClientGUI extends JFrame implements ActionListener {
                 tf.setText("");
                 return;
             }
-
 
             if (o == login) {
                 // ok it is a connection request
@@ -187,7 +212,7 @@ public class MessageClientGUI extends JFrame implements ActionListener {
                 try {
                     port = Integer.parseInt(portNumber);
                 } catch (Exception en) {
-                    return;   // nothing I can do if port number is not valid
+                    return; // nothing I can do if port number is not valid
                 }
 
                 // try creating a new Client with GUI
@@ -216,12 +241,10 @@ public class MessageClientGUI extends JFrame implements ActionListener {
     }
 
     // to start the whole thing the server
-   /* public static void main(String[] args) {
-        try {
-            new MessageClientGUI("localhost", 1500);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
+    /*
+     * public static void main(String[] args) { try { new
+     * MessageClientGUI("localhost", 1500); } catch (Exception e) {
+     * e.printStackTrace(); } }
+     */
 
 }
