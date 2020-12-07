@@ -1,5 +1,3 @@
-package CS180Project5;
-
 import java.io.*;
 
 /**
