@@ -123,7 +123,7 @@ public class LoginGUI extends JComponent implements Runnable { // it is assumed 
 	public void run() {
 		try {
 			welcomePanel = new JFrame("Welcome");
-			ImageIcon icon = new ImageIcon("Welcome.jpg");
+			ImageIcon icon = new ImageIcon("Welcome2.png");
 			JLabel label = new JLabel(icon);
 			welcomePanel.getContentPane().add(label, BorderLayout.CENTER);
 			login = new JButton("Login");
@@ -140,7 +140,7 @@ public class LoginGUI extends JComponent implements Runnable { // it is assumed 
 			subPanel.add(deleteAccount);
 			subPanel.add(editAccount);
 			welcomePanel.add(subPanel, BorderLayout.SOUTH);
-			welcomePanel.setSize(500, 700);
+			welcomePanel.setSize(500, 800);
 			welcomePanel.setLocationRelativeTo(null);
 			welcomePanel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			welcomePanel.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -183,7 +183,7 @@ public class LoginGUI extends JComponent implements Runnable { // it is assumed 
 			back.setBounds(205, 368, 80, 25);
 			back.addActionListener(actionListener);
 			subLabel.add(back);
-			loginPanel.setSize(500, 700);
+			loginPanel.setSize(500, 800);
 			loginPanel.setLocationRelativeTo(null);
 			loginPanel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			loginPanel.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -242,7 +242,7 @@ public class LoginGUI extends JComponent implements Runnable { // it is assumed 
 			enter1.setBounds(185, 368, 130, 25);
 			enter1.addActionListener(actionListener);
 			subLabel1.add(enter1);
-			createAccountPanel.setSize(500, 700);
+			createAccountPanel.setSize(500, 800);
 			createAccountPanel.setLocationRelativeTo(null);
 			createAccountPanel.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 			createAccountPanel.addWindowListener(new WindowAdapter() {
@@ -283,7 +283,7 @@ public class LoginGUI extends JComponent implements Runnable { // it is assumed 
 			back2.setBounds(205, 368, 80, 25);
 			back2.addActionListener(actionListener);
 			subLabel2.add(back2);
-			deleteAccountPanel.setSize(500, 700);
+			deleteAccountPanel.setSize(500, 800);
 			deleteAccountPanel.setLocationRelativeTo(null);
 			deleteAccountPanel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			deleteAccountPanel.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -325,7 +325,7 @@ public class LoginGUI extends JComponent implements Runnable { // it is assumed 
 			back3.setBounds(205, 368, 80, 25);
 			back3.addActionListener(actionListener);
 			subLabel3.add(back3);
-			loginPanel1.setSize(500, 700);
+			loginPanel1.setSize(500, 800);
 			loginPanel1.setLocationRelativeTo(null);
 			loginPanel1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			loginPanel1.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -385,7 +385,7 @@ public class LoginGUI extends JComponent implements Runnable { // it is assumed 
 			enter4.setBounds(185, 368, 130, 25);
 			enter4.addActionListener(actionListener);
 			subLabel4.add(enter4);
-			editAccountPanel.setSize(500, 700);
+			editAccountPanel.setSize(500, 800);
 			editAccountPanel.setLocationRelativeTo(null);
 			editAccountPanel.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 			editAccountPanel.addWindowListener(new WindowAdapter() {
