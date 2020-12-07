@@ -16,7 +16,7 @@ import java.awt.event.*;
 
 public class MessageClientGUI extends JFrame implements ActionListener {
 
-	static String userName;
+    static String userName;
     private static final long serialVersionUID = 1L;
     // will first hold "Username:", later on "Enter message"
     private JLabel label;
@@ -35,6 +35,9 @@ public class MessageClientGUI extends JFrame implements ActionListener {
     // the default port number
     private int defaultPort;
     private String defaultHost;
+    // custom gold color
+    static Color gold = new Color(212, 189, 138);
+
 
     // Constructor connection receiving a socket number
     MessageClientGUI(String host, int port, String username) {
@@ -62,10 +65,10 @@ public class MessageClientGUI extends JFrame implements ActionListener {
             northPanel.add(serverAndPort);
 
             // the Label and the TextField
-            label = new JLabel("Welcome " + username, SwingConstants.CENTER);
+            label = new JLabel("Welcome, " + username + "!", SwingConstants.CENTER);
             northPanel.add(label);
             tf = new JTextField("Login, then enter message here.");
-            tf.setBackground(Color.WHITE);
+            tf.setBackground(gold);
             northPanel.add(tf);
             add(northPanel, BorderLayout.NORTH);
 
@@ -74,7 +77,13 @@ public class MessageClientGUI extends JFrame implements ActionListener {
             JPanel centerPanel = new JPanel(new GridLayout(1, 1));
             centerPanel.add(new JScrollPane(ta));
             ta.setEditable(false);
+//            JLabel background = new JLabel(new ImageIcon("chatscreen.png"));
+//            centerPanel.add(background);
+            ta.setBackground(Color.DARK_GRAY);
+            ta.setForeground(gold);
+
             add(centerPanel, BorderLayout.CENTER);
+
 
             // the 3 buttons
             login = new JButton("Login");
@@ -91,9 +100,9 @@ public class MessageClientGUI extends JFrame implements ActionListener {
             southPanel.add(logout);
             southPanel.add(users);
             add(southPanel, BorderLayout.SOUTH);
+            setSize(500, 800);
             setLocationRelativeTo(null);
             setDefaultCloseOperation(EXIT_ON_CLOSE);
-            setSize(500, 800);
             setVisible(true);
             tf.requestFocus();
         } catch (Exception e) {
