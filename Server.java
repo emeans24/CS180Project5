@@ -84,6 +84,11 @@ class ClientHandler extends Thread {
 			if (!line.equals("")) {
 				finalFile = finalFile.replace(line + "\n", "");
 			}
+			String accountToEdit = reader.readLine();
+			String newInfo = reader.readLine();
+			if (!accountToEdit.equals("")) {
+				finalFile = finalFile.replace(accountToEdit, newInfo);				
+			}
 			pw.println(finalFile);
 			pw.println("Exit");
 			pw.flush();
