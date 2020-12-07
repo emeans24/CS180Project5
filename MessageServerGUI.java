@@ -1,5 +1,3 @@
-package CS180Project5;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -162,4 +160,3 @@ public class MessageServerGUI extends JFrame implements ActionListener, WindowLi
     }
 
 }
-
