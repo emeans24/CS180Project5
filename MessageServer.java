@@ -1,7 +1,6 @@
-package CS180Project5;
-
 import java.io.*;
 import java.net.*;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -109,7 +108,7 @@ public class MessageServer {
             keepGoing = false;
             // connect to myself as Client to exit statement
             // Socket socket = serverSocket.accept();
-            new Socket("localhost", port);
+            new Socket("25.90.148.185", port);
         }
         catch(Exception e) {
             // nothing I can really do
@@ -119,8 +118,13 @@ public class MessageServer {
      * Display an event (not a message) to the console or the GUI
      */
     private void display(String msg) {
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        Date dateobj = new Date();
+        String formatDate = df.format(dateobj);
+
         try {
-            String time = sdf.format(new Date()) + " " + msg;
+            // String time = sdf.format(new Date()) + " " + msg;
+            String time = formatDate + " " + msg;
             if (sg == null)
                 System.out.println(time);
             else
@@ -332,4 +336,3 @@ public class MessageServer {
         }
     }
 }
-
