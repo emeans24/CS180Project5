@@ -588,6 +588,10 @@ public class LoginGUI extends JComponent implements Runnable { // it is assumed 
                         welcomePanel.setVisible(true);
                     }
                 }
+                if (e.getSource() == editAccount) {
+                	welcomePanel.dispose();
+                	loginPanel1.setVisible(true);
+                }
             } catch (Exception e2) {
                 e2.printStackTrace();
             }
