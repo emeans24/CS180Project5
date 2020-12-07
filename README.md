@@ -5,7 +5,7 @@ for those methods was optional.
 
 Tests for LoginGUI
 
-    The LoginGUI is used when a client runs the program initially, giving them the option to login, create an account, delete an account, or edit an account. This is what leads     to the message screens and allows for users to message one another. This is connected to the server class.
+    The LoginGUI is used when a client runs the program initially, giving them the option to login, create an account, delete an account, or edit an account. This is what leads     to the message screens and allows for users to message one another. This is connected to the server class. It should also be worth noting that on line 71 of the code is a file path. This file path is unique for each user and should be edited manually to a file path that the user is comfortable saving their messages at.
     
     GUI Test 1 for openAndClose() method
         Step 1: Activate Server class, such as through terminal.
